@@ -15,3 +15,11 @@ This full-stack To-Do List application uses **React** for the front end, **Expre
 - **Backend**: Express.js, MongoDB
 - **Database**: MongoDB
 - **Styling**: CSS
+
+### Note:
+
+**cd Server** then **npm start**: To run the backend of the project
+
+then in a seperate terminal
+
+**cd todolist** then **npm run dev**: to Run the frontend of the project
