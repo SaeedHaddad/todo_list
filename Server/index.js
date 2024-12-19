@@ -82,6 +82,9 @@ app.delete("/delete/:id", (req, res) => {
 
 app.post("/add", (req, res) => {
   const { task } = req.body; // Destructure directly from req.body
+  if (!task) {
+    return res.status(400).json({ error: "Task cannot be empty" });
+  }
   TodoModel.create({ task })
     .then((result) => res.json(result))
     .catch((err) => {
