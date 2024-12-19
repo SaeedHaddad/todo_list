@@ -24,6 +24,10 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
+app.get("/", (req, res) => {
+  res.send("Backend server is running!");
+});
+
 app.get("/get", (req, res) => {
   console.log("GET /get endpoint hit"); // Log request
   TodoModel.find()
