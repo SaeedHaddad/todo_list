@@ -3,7 +3,7 @@ import axios from "axios";
 import "./App.css";
 
 function Create() {
-  const [todos, setTodos] = useState([]);
+  const [task, setTask] = useState("");
 
   const handleAdd = () => {
     if (!task) {
@@ -11,10 +11,9 @@ function Create() {
       return;
     }
     axios
-      .post("http://13.61.1.235:3001/add", { task })
+      .post("http://13.61.1.235:3001/add", { task }) // Use 'task' here, not 'newTask'
       .then((result) => {
-        setTodos([...todos, result.data]); // Add the new task to the state
-        setTask(""); // Clear the input field
+        location.reload();
       })
       .catch((err) => console.error("Error adding task:", err));
   };
@@ -25,7 +24,7 @@ function Create() {
         type="text"
         placeholder="Enter Task"
         value={task}
-        onChange={(e) => setTask(e.target.value)}
+        onChange={(e) => setTask(e.target.value)} // Update the 'task' state
       />
       <button type="button" onClick={handleAdd}>
         Add
