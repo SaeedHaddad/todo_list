@@ -22,10 +22,10 @@ function Home() {
     axios
       .get("http://13.61.1.235:3001/get")
       .then((result) => {
-        console.log("Data fetched:", result.data); // Log fetched data
-        setTodos(result.data);
+        console.log(result.data); // Log the response data
+        setTodos(result.data); // Update state with data
       })
-      .catch((err) => console.error("Error fetching data:", err)); // Log errors
+      .catch((err) => console.log(err));
   }, []);
 
   const handleEdit = (id) => {
