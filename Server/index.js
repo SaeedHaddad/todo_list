@@ -17,12 +17,24 @@ const mongoURI =
   process.env.MONGO_URI || "mongodb://127.0.0.1:27017/todolist_db";
 
 mongoose
-  .connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect("mongodb://127.0.0.1:27017/todolist_db", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
-app.get("/", (req, res) => {
-  res.send("Backend is running!");
+app.get("/get", (req, res) => {
+  console.log("GET /get endpoint hit"); // Log request
+  TodoModel.find()
+    .then((result) => {
+      console.log("Data retrieved:", result); // Log result
+      res.json(result);
+    })
+    .catch((err) => {
+      console.error("Error fetching data:", err); // Log error
+      res.status(500).json(err);
+    });
 });
 
 app.get("/get", (req, res) => {

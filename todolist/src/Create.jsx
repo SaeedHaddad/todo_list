@@ -11,7 +11,7 @@ function Create() {
       return;
     }
     axios
-      .post("http://0.0.0.0:3001/add", { task })
+      .post("http://13.61.1.235:3001/add", { task })
       .then((result) => {
         location.reload();
       })
