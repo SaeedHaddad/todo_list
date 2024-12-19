@@ -65,7 +65,13 @@ app.put("/update/:id", (req, res) => {
 app.delete("/delete/:id", (req, res) => {
   const { id } = req.params;
   TodoModel.findByIdAndDelete(id)
-    .then((deletedTodo) => res.json(deletedTodo))
+    .then((deletedTodo) => {
+      console.log("Deleting todo with ID:", id);
+      if (!deletedTodo) {
+        return res.status(404).json({ error: "Todo not found" });
+      }
+      res.json(deletedTodo);
+    })
     .catch((err) => {
       console.error(err);
       res

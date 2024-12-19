@@ -32,11 +32,12 @@ function Home() {
 
   const handleDelete = (id) => {
     axios
-      .delete(`$http://13.61.1.235:3001/delete/${id}`)
+      .delete(`http://13.61.1.235:3001/delete/${id}`)
       .then((result) => {
-        location.reload();
+        console.log("Deleting task with ID:", id);
+        location.reload(); // Reload the page to reflect the changes
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("Error deleting task:", err));
   };
 
   return (
