@@ -8,13 +8,6 @@ import {
   BsFillCheckCircleFill,
 } from "react-icons/bs";
 
-app.use(
-  cors({
-    origin: "http://13.61.1.235:5173", // Frontend URL
-    methods: ["GET", "POST", "PUT", "DELETE"],
-  })
-);
-
 function Home() {
   const [todos, setTodos] = useState([]);
 

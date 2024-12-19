@@ -5,13 +5,14 @@ const TodoModel = require("./Models/Todo");
 require("dotenv").config();
 
 const app = express();
-app.use(
-  cors({
-    origin: ["http://13.61.1.235:5173"], // Replace with your frontend's public IP or domain
-    methods: ["GET", "POST", "PUT", "DELETE"],
-  })
-);
 app.use(express.json());
+const corsOptions = {
+  origin: "http://13.61.1.235:5173", // Replace with your frontend URL
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type"],
+};
+
+app.use(cors(corsOptions));
 
 const mongoURI =
   process.env.MONGO_URI || "mongodb://127.0.0.1:27017/todolist_db";
