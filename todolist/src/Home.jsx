@@ -8,19 +8,22 @@ import {
   BsFillCheckCircleFill,
 } from "react-icons/bs";
 
+// Replace with your EC2 instance's public IP or domain
+const backendURL = "http://13.61.1.235:3001"; // Update this with your actual backend URL
+
 function Home() {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://0.0.0.0:3001/get")
+      .get(`${backendURL}/get`)
       .then((result) => setTodos(result.data))
       .catch((err) => console.log(err));
   }, []);
 
   const handleEdit = (id) => {
     axios
-      .put(`http://0.0.0.0:3001/update/${id}`)
+      .put(`${backendURL}/update/${id}`)
       .then((result) => {
         location.reload();
       })
@@ -29,7 +32,7 @@ function Home() {
 
   const handleDelete = (id) => {
     axios
-      .delete(`http://0.0.0.0:3001/delete/${id}`)
+      .delete(`${backendURL}/delete/${id}`)
       .then((result) => {
         location.reload();
       })
