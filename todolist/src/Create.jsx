@@ -3,7 +3,7 @@ import axios from "axios";
 import "./App.css";
 
 function Create() {
-  const [task, setTask] = useState("");
+  const [todos, setTodos] = useState([]);
 
   const handleAdd = () => {
     if (!task) {
@@ -11,9 +11,10 @@ function Create() {
       return;
     }
     axios
-      .post("http://13.61.1.235:3001/add", { task: newTask })
+      .post("http://13.61.1.235:3001/add", { task })
       .then((result) => {
-        location.reload();
+        setTodos([...todos, result.data]); // Add the new task to the state
+        setTask(""); // Clear the input field
       })
       .catch((err) => console.error("Error adding task:", err));
   };

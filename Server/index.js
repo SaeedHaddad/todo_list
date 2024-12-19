@@ -16,12 +16,12 @@ app.use(cors(corsOptions));
 
 const mongoURI =
   process.env.MONGO_URI || "mongodb://127.0.0.1:27017/todolist_db";
-
 mongoose
-  .connect("mongodb://127.0.0.1:27017/todolist_db", {
+  .connect(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
+
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
@@ -40,12 +40,6 @@ app.get("/get", (req, res) => {
       console.error("Error fetching data:", err); // Log error
       res.status(500).json(err);
     });
-});
-
-app.get("/get", (req, res) => {
-  TodoModel.find()
-    .then((result) => res.json(result))
-    .catch((err) => res.json(err));
 });
 
 app.put("/update/:id", (req, res) => {
@@ -81,10 +75,13 @@ app.delete("/delete/:id", (req, res) => {
 });
 
 app.post("/add", (req, res) => {
-  const task = req.body.task;
+  const { task } = req.body; // Destructure directly from req.body
   TodoModel.create({ task })
     .then((result) => res.json(result))
-    .catch((err) => res.json(err));
+    .catch((err) => {
+      console.error("Error adding task:", err);
+      res.status(500).json({ error: "Error adding task" });
+    });
 });
 
 app.listen(3001, "0.0.0.0", () => {
